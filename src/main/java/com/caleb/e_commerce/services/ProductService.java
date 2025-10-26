@@ -3,6 +3,7 @@ package com.caleb.e_commerce.services;
 import com.caleb.e_commerce.dto.ProductDTO;
 import com.caleb.e_commerce.entities.Product;
 import com.caleb.e_commerce.repositories.ProductRepository;
+import com.caleb.e_commerce.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +21,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id){
-        Product product = productRepository.findById(id).get();
+        Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found!"));
         return new ProductDTO(product);
     }
 
