@@ -1,12 +1,18 @@
 package com.caleb.e_commerce.dto;
 
 import com.caleb.e_commerce.entities.Product;
+import jakarta.validation.constraints.*;
 
 public class ProductDTO {
 
     private Long id;
+    @Size(min = 3, max = 80, message = "Name must be 3 to 80 characters long")
+    @NotBlank(message = "Field required")
     private String name;
+    @Size(min = 10, message = "Description must be minimum 10 characters long")
+    @NotBlank(message = "Field required")
     private String description;
+    @Positive(message = "Price must be positive")
     private Double price;
     private String imgUrl;
 
